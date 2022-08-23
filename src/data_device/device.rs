@@ -116,6 +116,9 @@ fn data_device_implem<F>(
         Event::DataOffer { id } => inner.new_offer(id),
         Event::Enter { serial, surface, x, y, id } => {
             inner.set_dnd(id);
+            if let Some(offer) = &mut inner.current_dnd {
+                offer.set_serial(serial);
+            }
             implem(
                 DndEvent::Enter { serial, surface, x, y, offer: inner.current_dnd.as_ref() },
                 ddata,

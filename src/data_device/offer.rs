@@ -53,6 +53,10 @@ impl DataOffer {
         DataOffer { offer: offer.detach(), inner }
     }
 
+    pub(crate) fn set_serial(&mut self, serial: u32) {
+        self.inner.lock().unwrap().serial = serial;
+    }
+
     /// Access the list of mime types proposed by this offer
     pub fn with_mime_types<F, T>(&self, f: F) -> T
     where
